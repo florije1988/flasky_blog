@@ -3,11 +3,13 @@ __author__ = 'florije'
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
+from flask.ext.login import UserMixin
 
 
 class Role(db.Model):
     __tablename__ = 'roles'
     id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(64), unique=True, index=True)
     name = db.Column(db.String(64), unique=True)
     users = db.relationship('User', backref='role', lazy='dynamic')
 

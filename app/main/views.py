@@ -28,3 +28,9 @@ def index():
     return render_template('index.html',
                            form=form, name=session.get('name'),
                            known=session.get('known', False))
+
+
+@main.route('/initdb', methods=['GET'])
+def init():
+    db.create_all()
+    return 'ok'
